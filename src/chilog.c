@@ -1,8 +1,8 @@
 /***************************************************************************************************************************
-This code is written by Sudheendra H, Team Chimera.
+This code is written by Sudheendra H, Team Chimera. (c)2020, Team Chimera.
 ***************************************************************************************************************************/
 
-#include "chilog.h"
+#include "../include/chilog.h"
 
 void setNames(struct ChiLOG *cl, char lifn[], char lfn[], char extn[])
 {
