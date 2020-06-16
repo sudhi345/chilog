@@ -2,7 +2,7 @@
 (c)2020, Team Chimera.
 ***************************************************************************************************************/
 
-#include "include/chilog.h"
+#include "chilog.h"
 #include <unistd.h>
 
 #include <net/if.h>
@@ -78,7 +78,7 @@ int main(void)
 			}
 			if (frame.can_id & CAN_RTR_FLAG)				//Remote Tx Req Frame
 			{
-        			n += snprintf(buf + n, BUF_SIZ - n, "remote request");
+        			n += snprintf(buf + n, BUF_SIZ - n, "Remote request");
 				strcpy(fType,"CAN_STD_RTR");
 			}
 		}
