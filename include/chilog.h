@@ -27,6 +27,6 @@ int getFileNum(char *tempName);
 void chilogInit(struct ChiLOG *cl);
 void chilog(struct ChiLOG *cl, char * type, char * str);
 void chilogCSVInit(struct ChiLOG *cl);
-void chilogCSV(struct ChiLOG *cl, int dir, int rpm, int err, int bat_v, int mot_i, int mot_t, int ctl_t);
+void chilogCSV(struct ChiLOG *cl, int dir, int rpm, int err, int bat_v, int mot_i, int mot_t, int ctl_t);//err will be printed in hex format
 
 #endif

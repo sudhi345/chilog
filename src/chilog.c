@@ -98,7 +98,7 @@ void chilogCSVInit(struct ChiLOG *cl)
 void chilogCSV(struct ChiLOG *cl, int dir, int rpm, int err, int bat_v, int mot_i, int mot_t, int ctl_t)
 {
 	cl->lf = fopen(cl->fileName,"a");
-	fprintf(cl->lf,"%ld.%d,%d,%d,%d,%d,%d,%d,%d\n",(time(NULL) - (cl->bt)), clock(), dir, rpm, err, bat_v, mot_i, mot_t, ctl_t);
+	fprintf(cl->lf,"%ld.%d,%d,%d,%x,%d,%d,%d,%d\n",(time(NULL) - (cl->bt)), clock(), dir, rpm, err, bat_v, mot_i, mot_t, ctl_t);
 	fclose(cl->lf);
 	return;
 }
