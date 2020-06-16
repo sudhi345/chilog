@@ -89,15 +89,15 @@ int main(void)
 			if((frame.can_id & CAN_EFF_MASK) == 0x10F8109A)			//frame containing dir,rpm and err
 			{
 				dir = (int) (frame.data[0] & 0x03);			//Bit1-bit0:00--Neutral; 01--Forward; 10--Reverse; Bit2-bit7:reserved
-				rpm = (((int)frame.data[1]) + (((int)frame.data[2])*256);
+				rpm = (((int)frame.data[1]) + (((int)frame.data[2])*256));
 				err = (int) (frame.data[3]);				//This will be printed as hex value, no need to change
 			}
 			else if((frame.can_id & CAN_EFF_MASK) == 0x10F8108D)		//frame containing bat_v, mot_i, mot_t and ctl_t
 			{
-				bat_v = (((int)frame.data[0]) + (((int)frame.data[1])*256);
-				mot_i = (((int)frame.data[2]) + (((int)frame.data[3])*256);
-				mot_t = (((int)frame.data[4]) + (((int)frame.data[5])*256);
-				ctl_t = (((int)frame.data[6]) + (((int)frame.data[8])*256);
+				bat_v = (((int)frame.data[0]) + (((int)frame.data[1])*256));
+				mot_i = (((int)frame.data[2]) + (((int)frame.data[3])*256));
+				mot_t = (((int)frame.data[4]) + (((int)frame.data[5])*256));
+				ctl_t = (((int)frame.data[6]) + (((int)frame.data[8])*256));
 			}
 			else								//extend with else-if for other devices
 			{
