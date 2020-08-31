@@ -5,5 +5,4 @@ This library keeps a file containing all previously created log files and determ
 
 For reference: [Kelly 8080i CAN Protocol guide](https://kellycontroller.com/wp-content/uploads/kac-8080i/KAC-8080I-Broadcast-CAN-Protocol.pdf)
 
-### Note
-CAN_logger.c file may not be compiled without BSP-Yocto-i.MX6-PD18.1.0 for phyBoard-Mira-i.MX6.
+CAN_logger.c depends on SocketCAN. See [linux-can/can-utils](github.com/linux-can/can-utils/) for more info.
