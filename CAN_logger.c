@@ -15,13 +15,16 @@
 
 #define BUF_SIZ (255)
 
+#define DATA_FRAME_I 0x10F8109A
+#define DATA_FRAME_II 0x10F8108D
+
 int main(void)
 {
 	int s;
 	int n=0;
 	int nbytes ,i;
 	int dir = 0, rpm = 0, err = 0, bat_v = 0, mot_i = 0, mot_t = 0, ctl_t = 0;	//direction, RPM, Error code, Bat. Voltage, 
-											//Motor Current, Motor and Controller temperature. (Refere Kelly KAC 8080I manual)
+											//Motor Current, Motor and Controller temperature. (Refer Kelly KAC 8080I manual)
 	struct sockaddr_can addr;
 	struct can_frame frame;
 	struct ifreq ifr;
@@ -86,13 +89,13 @@ int main(void)
 		chilog(&txt, fType, buf);						//save it, no matter same data or different data
 		if(strcmp(prev_buf, buf))						//update CSV only when current data is different from previous data
 		{
-			if((frame.can_id & CAN_EFF_MASK) == 0x10F8109A)			//frame containing dir,rpm and err
+			if((frame.can_id & CAN_EFF_MASK) == DATA_FRAME_I)			//frame containing dir,rpm and err
 			{
 				dir = (int) (frame.data[0] & 0x03);			//Bit1-bit0:00--Neutral; 01--Forward; 10--Reverse; Bit2-bit7:reserved
 				rpm = (((int)frame.data[1]) + (((int)frame.data[2])*256));
 				err = (int) (frame.data[3]);				//This will be printed as hex value, no need to change
 			}
-			else if((frame.can_id & CAN_EFF_MASK) == 0x10F8108D)		//frame containing bat_v, mot_i, mot_t and ctl_t
+			else if((frame.can_id & CAN_EFF_MASK) == DATA_FRAME_II)		//frame containing bat_v, mot_i, mot_t and ctl_t
 			{
 				bat_v = (((int)frame.data[0]) + (((int)frame.data[1])*256));
 				mot_i = (((int)frame.data[2]) + (((int)frame.data[3])*256));
@@ -102,7 +105,7 @@ int main(void)
 			else								//extend with else-if for other devices
 			{
 			}
-			if(((frame.can_id & CAN_EFF_MASK) == 0x10F8109A) || ((frame.can_id & CAN_EFF_MASK) == 0x10F8108D))
+			if(((frame.can_id & CAN_EFF_MASK) == DATA_FRAME_I) || ((frame.can_id & CAN_EFF_MASK) == DATA_FRAME_II))
 			{								//save it only if the received data is from the controller
 				chilogCSV(&csv, dir, rpm, err, bat_v, mot_i, mot_t, ctl_t);//save it to CSV file
 			}
